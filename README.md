@@ -1,1 +1,1 @@
-# long_distance_project
+# Welcome to the Long Distance Project
