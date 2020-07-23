@@ -7,3 +7,5 @@ class TodaysWorkout extends Component {
         )
     }
 }
+
+export default TodaysWorkout
