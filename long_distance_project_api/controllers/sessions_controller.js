@@ -3,11 +3,12 @@ const User = require("../models/users");
 const sessionsRouter = express.Router();
 const bcrypt = require("bcrypt");
 
-sessionsRouter.get("/new", (req, res) => {
-  // res.render('sessions/new.ejs', {
-  // currentUser: req.session.currentUser,
-  // });
-});
+// sessionsRouter.get("/", (req, res) => {
+//     User.find({}, )
+//   // res.render('sessions/new.ejs', {
+//   // currentUser: req.session.currentUser,
+//   // });
+// });
 
 sessionsRouter.post("/", (req, res) => {
   //Check to see if the user exists

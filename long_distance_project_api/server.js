@@ -40,7 +40,9 @@ app.use(
 app.use(express.json());
 
 const cors = require("cors");
-const whitelist = ["http://localhost:3000", ".herokuapp.com"];
+
+const whitelist = ["http://localhost:3000"];
+//".herokuapp.com" -- add back later
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

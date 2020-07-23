@@ -1,14 +1,16 @@
 import React from "react";
-import Log_In_Form from "./components/Log_In_Form";
-let baseURL = "http://localhost:3003";
+import NewUserForm from "./components/NewUserForm";
+// let baseURL = "http://localhost:3003";
 
 class App extends React.Component {
   state = {
     trainingDay: [],
+    users: [],
+    baseURL: "http://localhost:3003",
   };
 
   getTrainingDay = () => {
-    fetch(baseURL + "/")
+    fetch(this.baseURL + "/")
       .then((res) => {
         return res.json();
       })
@@ -20,6 +22,14 @@ class App extends React.Component {
       });
   };
 
+  addUser = (newUser) => {
+    const copyUsers = [...this.state.users];
+    copyUsers.push(newUser);
+    this.setState({
+      users: copyUsers,
+    });
+  };
+
   componentDidMount = () => {
     this.getTrainingDay();
   };
@@ -28,8 +38,13 @@ class App extends React.Component {
     return (
       <div>
         <h1>Welcome to the long distance project.</h1>
-        <h3>Create A User Account</h3>
-        <Log_In_Form />
+
+        <NewUserForm
+          baseURL={this.state.baseURL}
+          addUser={this.addUser}
+          trainingDay={this.state.trainingDay}
+          users={this.state.users}
+        />
       </div>
     );
   }

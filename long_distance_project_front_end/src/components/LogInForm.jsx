@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Log_In_Form extends Component {
+export default class LogInForm extends Component {
     state = {
         user: [],
     }
