@@ -1,35 +1,38 @@
-import React from 'react';
-let baseURL = 'http://localhost:3003'
-
+import React from "react";
+import Log_In_Form from "./components/Log_In_Form";
+let baseURL = "http://localhost:3003";
 
 class App extends React.Component {
   state = {
-    trainingDay: []
-  }
+    trainingDay: [],
+  };
 
   getTrainingDay = () => {
-    fetch(baseURL + '/').then(res => {
-      return res.json()
-    }).then(data => {
-      console.log(data)
-      this.setState({
-        trainingDay: data,
+    fetch(baseURL + "/")
+      .then((res) => {
+        return res.json();
       })
-    })
-  }
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          trainingDay: data,
+        });
+      });
+  };
 
-componentDidMount = () => {
-  this.getTrainingDay()
-}
+  componentDidMount = () => {
+    this.getTrainingDay();
+  };
 
-  render () {
+  render() {
     return (
       <div>
         <h1>Welcome to the long distance project.</h1>
+        <h3>Create A User Account</h3>
+        <Log_In_Form />
       </div>
-    )
+    );
   }
 }
-
 
 export default App;
