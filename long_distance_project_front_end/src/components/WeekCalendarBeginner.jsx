@@ -5,13 +5,15 @@ import beginner from '../data/beginner.js'
 
 class WeekCalendarBeginner extends Component {
 
-    
+    state = {
+        complete: false,
+    }
 
-    // checkOffDay = () => {
-    //     this.setState({
-
-    //     })
-    // }
+    toggleComplete = () => {
+        this.setState({
+            complete: !this.state.complete
+        })
+    }
 
     render () {
         return (
@@ -20,13 +22,20 @@ class WeekCalendarBeginner extends Component {
                 {this.props.beginner.map((beginner, index) => {
                     return <div key={index}>
                         <p>{beginner.weekNumber}</p>
-                        </div>
-                })}
-                {this.props.beginner.map((weekDays, index) => {
-                            return <div>
-                                <p>{weekDays.day}</p>
+                        {beginner.weekDays.map((weekDays, subindex) => {
+                            return <div key={subindex}>
+                                <ul onClick={ () => {this.toggleComplete()}}>
+                                    <li>Day: {weekDays.day}</li>
+                                    
+                                    <li>Workout: {weekDays.run}</li>
+                                    <li>Complete:{weekDays.complete}</li>
+                                </ul>
+                                
                             </div>
                         })}
+                        </div>
+                    })}
+                
                 </div>
         )
     }

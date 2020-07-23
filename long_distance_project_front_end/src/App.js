@@ -9,13 +9,22 @@ let baseURL = 'http://localhost:3003'
 
 
 class App extends React.Component {
+<<<<<<< HEAD
   //  state = {
   //   beginner: beginner,
   //   weekDays: weekDays,
     
   // }
+=======
+   state = {
+    beginner: beginner,
+    completedDays: [],    
+  }
+>>>>>>> 8981ad4352fbce8ff967c8339d6a79be1c50dfc6
     
-
+  checkOffDay = (day) => {
+    this.setState({completedDays: [day, ... this.state.completedDays]})
+  }
 
   render () {
     return (
