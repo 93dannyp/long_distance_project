@@ -3,7 +3,7 @@ const training = express.Router()
 
 const Training = require('../models/trainingDay.js')
 
-// Routes 
+// ==================== ROUTES ====================
 // Index Route
 training.get('/', (req, res) => {
     Training.find({}, (err, foundTraining) => {
