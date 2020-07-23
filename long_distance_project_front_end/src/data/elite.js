@@ -1,5 +1,5 @@
-//example referencing week 9: elite[8].tuesday = '6'
-
+//example referencing the run for week 9 would look like this:
+// elite[8].weekDays[2].run returns '6'
 
 const elite = [
     {weekNumber: '1', 

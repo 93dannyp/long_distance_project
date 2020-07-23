@@ -1,4 +1,5 @@
-//example referencing week 9: intermediate[8].tuesday = '4'
+//example referencing the run for week 9 would look like this:
+// intermediate[8].weekDays[2].run returns '4'
 
 const intermediate = [
     {weekNumber: '1', 
