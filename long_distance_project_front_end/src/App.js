@@ -1,4 +1,7 @@
 import React from 'react';
+import RunnerInfo from './components/RunnerInfo.jsx'
+
+
 let baseURL = 'http://localhost:3003'
 
 
@@ -26,7 +29,7 @@ componentDidMount = () => {
   render () {
     return (
       <div>
-        <h1>Welcome to the long distance project.</h1>
+        <RunnerInfo />
       </div>
     )
   }
