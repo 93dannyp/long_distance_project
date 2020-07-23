@@ -183,4 +183,4 @@ const intermediate = [
     },
 ]
 
-module.exports = intermediate
+export default intermediate
