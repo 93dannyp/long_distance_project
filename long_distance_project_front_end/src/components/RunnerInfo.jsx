@@ -21,7 +21,6 @@ export default class RunnerInfo extends Component {
                 <div>
                     <label htmlFor="date">Race Date<input type="date" id="date" /></label>
                     <div>
-                        
                     </div>
                 </div>
 
