@@ -1,6 +1,13 @@
 import React from 'react';
+<<<<<<< HEAD
 import RunnerInfo from './components/RunnerInfo.jsx'
 
+=======
+import beginner from './data/beginner.js'
+import intermediate from './data/intermediate.js'
+import elite from './data/elite.js'
+import WeekCalendarBeginner from './components/WeekCalendarBeginner.jsx';
+>>>>>>> ce53c1e6f27ca8822521832cbf5463c20de90ffa
 
 let baseURL = 'http://localhost:3003'
 
@@ -29,7 +36,14 @@ componentDidMount = () => {
   render () {
     return (
       <div>
+<<<<<<< HEAD
         <RunnerInfo />
+=======
+        
+        <h1>Welcome to the long distance project.</h1>
+        <WeekCalendarBeginner />
+        
+>>>>>>> ce53c1e6f27ca8822521832cbf5463c20de90ffa
       </div>
     )
   }
