@@ -7,6 +7,7 @@ class App extends React.Component {
     trainingDay: []
   }
 
+  //this is supposed to retrieve the strava API info
   getTrainingDay = () => {
     fetch(baseURL + '/').then(res => {
       return res.json()
