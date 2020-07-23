@@ -1,50 +1,30 @@
-import React from "react";
-import NewUserForm from "./components/NewUserForm";
-// let baseURL = "http://localhost:3003";
+import React from 'react'
+
+import beginner from './data/beginner.js'
+
+import WeekCalendarBeginner from './components/WeekCalendarBeginner.jsx';
+
+let baseURL = 'http://localhost:3003'
+
 
 class App extends React.Component {
-  state = {
-    trainingDay: [],
-    users: [],
-    baseURL: "http://localhost:3003",
-  };
+   state = {
+    beginner: beginner,
+    completedDays: [],    
+  }
+    
+  checkOffDay = (day) => {
+    this.setState({completedDays: [day, ... this.state.completedDays]})
+  }
 
-  getTrainingDay = () => {
-    fetch(this.baseURL + "/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this.setState({
-          trainingDay: data,
-        });
-      });
-  };
-
-  addUser = (newUser) => {
-    const copyUsers = [...this.state.users];
-    copyUsers.push(newUser);
-    this.setState({
-      users: copyUsers,
-    });
-  };
-
-  componentDidMount = () => {
-    this.getTrainingDay();
-  };
-
-  render() {
+  render () {
     return (
       <div>
-        <h1>Welcome to the long distance project.</h1>
-
-        <NewUserForm
-          baseURL={this.state.baseURL}
-          addUser={this.addUser}
-          trainingDay={this.state.trainingDay}
-          users={this.state.users}
-        />
+        
+        <h1>Welcome to the long distance project.</h1> 
+        
+        <WeekCalendarBeginner beginner={this.state.beginner}/>
+        
       </div>
     );
   }
