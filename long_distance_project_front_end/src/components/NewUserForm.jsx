@@ -12,9 +12,19 @@ export default class NewUserForm extends Component {
         })
     }
 
+    // getUsers = () => {
+    //     fetch(this.props.baseURL + '/training').then(res => {
+    //         return res.json();
+    //     }).then(data => {
+    //         this.setState({
+    //             holidays: data,
+    //         })
+    //     })
+    // }
     handleSubmit = (event) => {
-        event.preventDefault();
-        fetch(this.props.baseURL + '/training', {
+        console.log(this.props.baseURL)
+        event.preventDefault();        
+        fetch(this.props.baseURL + '/users', {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username,
@@ -33,6 +43,10 @@ export default class NewUserForm extends Component {
             });
         });
     }
+
+    // componentDidMount() {
+    //     this.getUsers();
+    // }
     
     render() {
         return (
@@ -40,10 +54,10 @@ export default class NewUserForm extends Component {
                 <h1>Create Your User Profile</h1>
                 <form onSubmit={(evt) => this.handleSubmit(evt)}>
                     <label htmlFor="username">Username: </label>
-                    <input type="text" id="username" onChange={(evt) => this.handleChange(evt)}/><br/>
+                    <input type="text" id="username" onChange={(evt) => this.handleChange(evt)} value={ this.state.username} /><br/>
                     <label htmlFor="level">Skill Level: </label>
-                    <input type="text" id="level" onChange={(evt) => this.handleChange(evt)}/><br/>
-                    <input type="submit" value="Log-In"/>
+                    <input type="text" id="level" onChange={(evt) => this.handleChange(evt)} value={ this.state.level}/><br/>
+                    <input type="submit" value="Create-User"/>
                 </form>
             
             </div>
