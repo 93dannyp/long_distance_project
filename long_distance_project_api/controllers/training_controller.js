@@ -1,47 +1,55 @@
-const express = require('express')
-const training = express.Router()
+const express = require("express");
+const training = express.Router();
 
-const Training = require('../models/trainingDay.js')
+const Training = require("../models/trainingDay.js");
 
-// ==================== ROUTES ====================
+const isAuthenticated = (req, res, next) => {
+  req.session.currentUser ? next() : res.redirect("/sessions/new");
+};
+
+// Routes
 // Index Route
-training.get('/', (req, res) => {
-    Training.find({}, (err, foundTraining) => {
-        if (err) {
-        res.status(400).json({ error: err.message })
+training.get("/", isAuthenticated, (req, res) => {
+  Training.find({}, (err, foundTraining) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
     }
-    res.status(200).json(foundTraining)
-    })
-})
+    res.status(200).json(foundTraining);
+  });
+});
 
 // Creat Route
-training.post('/', async (req, res) => {
-    Training.create(req.body, (error, createdTraining) => {
+training.post("/", (req, res) => {
+  Training.create(req.body, (error, createdTraining) => {
     if (error) {
-        res.status(400).json({ error: error.message })
+      res.status(400).json({ error: error.message });
     }
-    res.status(200).send(createdTraining) 
-    })
-})
-
+    res.status(200).send(createdTraining);
+  });
+});
 
 // Update Route
-training.put('/:id', (req, res) => {
-    Training.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedTraining) => {
-    if (err) {
-        res.status(400).json({ error: err.message })
+training.put("/:id", isAuthenticated, (req, res) => {
+  Training.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedTraining) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+      }
+      res.status(200).json(updatedTraining);
     }
-    res.status(200).json(updatedTraining)
-    })
-})
+  );
+});
 
 // Delete Route
-training.delete('/:id', (req, res) => {
-    Training.findByIdAndRemove(req.params.id, (err, deletedTraining) => {
+training.delete("/:id", isAuthenticated, (req, res) => {
+  Training.findByIdAndRemove(req.params.id, (err, deletedTraining) => {
     if (err) {
-        res.status(400).json({ error: err.message })
+      res.status(400).json({ error: err.message });
     }
-    res.status(200).json(deletedTraining)
-    })
-})
-module.exports = training
+    res.status(200).json(deletedTraining);
+  });
+});
+module.exports = training;
