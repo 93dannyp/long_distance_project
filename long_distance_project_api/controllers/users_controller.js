@@ -11,11 +11,10 @@ const isAuthenticated = (req, res, next) => {
 
 // CREATE ROUTE
 users.post("/", async (req, res) => {
-  console.log("banana");
   User.create(req.body, (error, createdUser) => {
     console.log("user is created", createdUser);
     if (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: "username already created" });
     }
     res.status(200).send(createdUser);
   });

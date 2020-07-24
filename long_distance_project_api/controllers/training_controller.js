@@ -19,7 +19,7 @@ training.get("/", isAuthenticated, (req, res) => {
 });
 
 // Creat Route
-training.post("/", isAuthenticated, (req, res) => {
+training.post("/", (req, res) => {
   Training.create(req.body, (error, createdTraining) => {
     if (error) {
       res.status(400).json({ error: error.message });
