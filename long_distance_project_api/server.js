@@ -12,7 +12,9 @@ const userController = require("./controllers/users_controller.js");
 const PORT = process.env.PORT || 3003
 
 //Database
+
 const mogodbURI = process.env.MONGODB_URI;
+
 
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>

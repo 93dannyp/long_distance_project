@@ -6,6 +6,7 @@ import RunnerInfo from './components/RunnerInfo.jsx';
 import TodaysWorkout from './components/TodaysWorkout.jsx';
 
 import NewUserForm from "./components/NewUserForm.jsx";
+import LogInForm from "./components/LogInForm.jsx";
 
 let baseURL = "http://localhost:3003";
 
@@ -52,8 +53,11 @@ class App extends React.Component {
     return (
       <div>
         <h1>Welcome to the long distance project.</h1>
+
+        
+        <LogInForm baseURL={baseURL} handleChange={this.handleChange} />
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
-        <NewUserForm baseURL={baseURL} addUser={this.addUser} />
+        <NewUserForm baseURL={baseURL} addUser={this.addUser} /> 
         <WeekCalendarBeginner beginner={this.state.beginner} />
 
       </div>
