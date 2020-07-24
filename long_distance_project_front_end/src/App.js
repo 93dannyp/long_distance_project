@@ -5,22 +5,32 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import About from './components/About'
 import NavBar from './components/NavBar'
+import NewUserForm from "./components/NewUserForm.jsx";
 
-let baseURL = 'http://localhost:3003'
-
+let baseURL = "http://localhost:3003";
 
 class App extends React.Component {
-   state = {
+  state = {
     beginner: beginner,
     completedDays: [],    
-    message: 'Hello'
-  }
-    
-  checkOffDay = (day) => {
-    this.setState({completedDays: [day, ... this.state.completedDays]})
-  }
+    message: 'Hello',
+    completedDays: [],
+    users: [],
+  };
 
-  render () {
+  addUser = (newUser) => {
+    const copyUser = [...this.state.users];
+    copyUser.push(newUser);
+    this.setState({
+      users: copyUser,
+    });
+  };
+
+  checkOffDay = (day) => {
+    this.setState({ completedDays: [day, ...this.state.completedDays] });
+  };
+
+  render() {
     return (
       <div>
           <NavBar />
@@ -30,11 +40,11 @@ class App extends React.Component {
           <Route exact path='/about' render={() => <About message={this.state.message} />} />
           <Route component={Error}/>
         </Switch>
-        <h1>Welcome to the long distance project.</h1>         
+        <h1>Welcome to the long distance project.</h1>
+        <NewUserForm baseURL={baseURL} addUser={this.addUser} />
       </div>
-    )
+    );
   }
 }
-
 
 export default App;

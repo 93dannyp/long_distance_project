@@ -1,40 +1,64 @@
-const express = require('express')
-const app = express()
-const mongoose = require('mongoose')
-const PORT = 3000
-const trainingController = require('./controllers/training_controller.js')
+const express = require("express");
+const app = express();
+const bcrypt = require("bcrypt");
+const session = require("express-session");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
+const sessionController = require("./controllers/sessions_controller.js");
+const trainingController = require("./controllers/training_controller.js");
+const userController = require("./controllers/users_controller.js");
 
+//Port
+const PORT = process.env.PORT;
+
+//Database
+const mogodbURI = process.env.MONGODBURI;
 
 // Error / Disconnection
-mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not running?'))
-mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
+mongoose.connection.on("error", (err) =>
+  console.log(err.message + " is Mongod not running?")
+);
+mongoose.connection.on("disconnected", () => console.log("mongo disconnected"));
 
-mongoose.connect('mongodb://localhost:27017/training', { useNewUrlParser: true })
-mongoose.connection.once('open', ()=>{
-    console.log('connected to mongoose...')
-})
+mongoose.connect("mongodb://localhost:27017/training", {
+  useNewUrlParser: true,
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to mongoose...");
+});
 
 // middleware
-app.use(express.json()); 
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-const cors = require('cors')
-const whitelist = ['http://localhost:3000', '.herokuapp.com']
+app.use(express.json());
+
+const cors = require("cors");
+
+const whitelist = ["http://localhost:3000"];
+//".herokuapp.com" -- add back later
 const corsOptions = {
-    origin: function (origin, callback) {
+  origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true)
+      callback(null, true);
     } else {
-        callback(new Error('Not allowed by CORS'))
+      callback(new Error("Not allowed by CORS"));
     }
-    }
-}
-app.use(cors(corsOptions)) 
+  },
+};
+app.use(cors(corsOptions));
 
-
-app.use('/training', trainingController)
-
+//Controllers
+app.use("/training", trainingController);
+app.use("/users", userController);
+app.use("/sessions", sessionController);
 
 app.listen(PORT, () => {
-    console.log('Magic on port', PORT, '!',)
-})
+  console.log("Magic on port", PORT, "!");
+});
