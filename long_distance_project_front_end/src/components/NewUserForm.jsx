@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+let baseURL = "http://localhost:3003";
+
 
 export default class NewUserForm extends Component {
     state = {
         username: '',
-                level: '',
+        level: '',
     }
 
 
@@ -23,9 +25,8 @@ export default class NewUserForm extends Component {
     //     })
     // }
     handleSubmit = (event) => {
-        console.log(this.props.baseURL)
         event.preventDefault();        
-        fetch(this.props.baseURL + '/users', {
+        fetch(this.props.baseURL+ '/users', {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username,
@@ -37,6 +38,8 @@ export default class NewUserForm extends Component {
         }).then(res => {
             return res.json();
         }).then(data => {
+            console.log((data))
+            // opportunity for duplicate username error handling
             this.props.addUser(data);
             this.setState({
                 username: '',
