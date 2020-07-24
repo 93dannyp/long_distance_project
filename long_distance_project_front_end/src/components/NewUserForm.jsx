@@ -1,33 +1,24 @@
 import React, { Component } from 'react'
 
 export default class NewUserForm extends Component {
+    //  why do I need state here? It won't work without it.
     state = {
-        
+        username: "",
+        level: "",
     }
-
-
+   
     handleChange = (event) => {
         this.setState({
-            [event.currentTarget.id]: event.currentTarget.value,
-        })
-    }
+          [event.currentTarget.id]: event.currentTarget.value,
+        });
+      };
 
-    // getUsers = () => {
-    //     fetch(this.props.baseURL + '/training').then(res => {
-    //         return res.json();
-    //     }).then(data => {
-    //         this.setState({
-    //             holidays: data,
-    //         })
-    //     })
-    // }
     handleSubmit = (event) => {
-        console.log(this.props.baseURL)
         event.preventDefault();        
         fetch(this.props.baseURL + '/users', {
             method: 'POST',
             body: JSON.stringify({
-                username: this.state.username,
+                username: this.state.username, //Why do I need "state" here? I don't need it in the form. Because I'm calling a function in here that is on the parent level? But wouldn't that mean I need props?
                 level: this.state.level,
             }),
             headers: {
@@ -43,10 +34,6 @@ export default class NewUserForm extends Component {
             });
         });
     }
-
-    // componentDidMount() {
-    //     this.getUsers();
-    // }
     
     render() {
         return (
@@ -59,7 +46,6 @@ export default class NewUserForm extends Component {
                     <input type="text" id="level" onChange={(evt) => this.handleChange(evt)} value={ this.state.level}/><br/>
                     <input type="submit" value="Create-User"/>
                 </form>
-            
             </div>
         )
     }

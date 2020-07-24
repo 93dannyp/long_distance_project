@@ -4,6 +4,7 @@ import beginner from "./data/beginner.js";
 
 import WeekCalendarBeginner from "./components/WeekCalendarBeginner.jsx";
 import NewUserForm from "./components/NewUserForm.jsx";
+import LogInForm from "./components/LogInForm.jsx";
 
 let baseURL = "http://localhost:3003";
 
@@ -30,7 +31,12 @@ class App extends React.Component {
     return (
       <div>
         <h1>Welcome to the long distance project.</h1>
-        <NewUserForm baseURL={baseURL} addUser={this.addUser} />
+        <NewUserForm
+          baseURL={baseURL}
+          addUser={this.addUser}
+          handleChange={this.handleChange}
+        />
+        <LogInForm baseURL={baseURL} handleChange={this.handleChange} />
         <WeekCalendarBeginner beginner={this.state.beginner} />
       </div>
     );

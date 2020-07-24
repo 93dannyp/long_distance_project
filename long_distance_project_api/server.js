@@ -13,7 +13,7 @@ const userController = require("./controllers/users_controller.js");
 const PORT = process.env.PORT;
 
 //Database
-const mogodbURI = process.env.MONGODBURI;
+const mogodb_URI = process.env.MONGODB_URI;
 
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>
