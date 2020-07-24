@@ -1,45 +1,29 @@
 const express = require("express");
 const User = require("../models/users");
 const sessionsRouter = express.Router();
-const bcrypt = require("bcrypt");
 
-// sessionsRouter.get("/", (req, res) => {
-//     User.find({}, )
-//   // res.render('sessions/new.ejs', {
-//   // currentUser: req.session.currentUser,
-//   // });
-// });
+//NO INDEX ROUTE NEEDED
 
 sessionsRouter.post("/", (req, res) => {
-  //Check to see if the user exists
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
-    //Check for an error in the query
-    //MAY NEED TO RECONFIGURE SOME OF THIS NOW THAT IT'S GOING THROUGH REACT
-    if (err) {
-      console.log(err);
-      res.send("Something bad happened in the database");
-    } else if (!foundUser) {
-      //if user isn'found in db. Re-direct and message.
-      res.send("<a href='/training/'>Sorry, user not found.</a>");
-    } else {
-      //User exists and the passwords can be compared
-      if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-        //If passwords match
-        req.session.currentUser = foundUser;
-        res.redirect("/training");
-      } else {
-        //Let them know if the password is incorrect
-        res.send('<a href="/training">Incorrect password.</a>');
+  if (User.findOne(req.params.username)) {
+    alert("Username is taken, please try another one");
+  } else {
+    //Check to see if the user exists first -- Can you put to database searches in one call? User.findOne({ username: req.body.username }, (err, foundUser) => { if(foundUser) { res.send("Username already exists. Choose another one")} else ...see below}
+    User.create(req.body, (error, createdUser) => {
+      if (error) {
+        res.status(400).json({ error: error.message });
       }
-    }
-  });
+      res.status(200).send(createdUser);
+    });
+  }
 });
 
 //DELETE route for logging out
-sessionsRouter.delete("/", (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/training");
-  });
+sessionsRouter.delete("/:id", (err, logOut) => {
+  if (err) {
+    res.status(400).json({ error: err.message });
+  }
+  res.status(200).json(logOut);
 });
 
 module.exports = sessionsRouter;
