@@ -13,6 +13,9 @@ export default function NavBar() {
             <div>
                 <Link to='/about'>ABOUT</Link>
             </div>
+            <div>
+                <Link to='/signup'>SIGN UP</Link>
+            </div>
         </div>
     )
 }

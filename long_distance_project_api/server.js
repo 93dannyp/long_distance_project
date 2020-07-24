@@ -10,10 +10,10 @@ const trainingController = require("./controllers/training_controller.js");
 const userController = require("./controllers/users_controller.js");
 
 //Port
-const PORT = process.env.PORT;
+const PORT = process.env.PORT 
 
 //Database
-const mogodbURI = process.env.MONGODBURI;
+const mogodbURI = process.env.MONGODB_URI;
 
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class NewUserForm extends Component {
     state = {
-        
+        username: '',
+                level: '',
     }
 
 
