@@ -4,37 +4,55 @@ import beginner from './data/beginner.js'
 
 import WeekCalendarBeginner from './components/WeekCalendarBeginner.jsx';
 import RunnerInfo from './components/RunnerInfo.jsx';
+import TodaysWorkout from './components/TodaysWorkout.jsx';
 
 let baseURL = 'http://localhost:3003'
 
 
 class App extends React.Component {
-<<<<<<< HEAD
-  //  state = {
-  //   beginner: beginner,
-  //   weekDays: weekDays,
-    
-  // }
-=======
-   state = {
+  state = {
     beginner: beginner,
-    completedDays: [],    
+    completedDays: [],  
+    trainingDay: [],
   }
->>>>>>> 8981ad4352fbce8ff967c8339d6a79be1c50dfc6
     
+  getTrainingDay = () => {
+    fetch(baseURL + '/training').then(res => {
+      return res.json();
+    }).then(data => {
+      this.setState({
+        trainingDay: data,
+      });
+    });
+  }
+
+  addTrainingDay = (newTrainingDay) => {
+    const copyTrainingDay = [...this.state.trainingDay];
+    copyTrainingDay.push(newTrainingDay);
+    this.setState({
+      trainingDay: copyTrainingDay,
+      
+    });
+  }
+
+
+
+
   checkOffDay = (day) => {
     this.setState({completedDays: [day, ... this.state.completedDays]})
   }
+ 
 
   render () {
     return (
       <div>
+        <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
         
-        <h1>Welcome to the long distance project.</h1> 
-        
-        {/* <WeekCalendarBeginner beginner={this.state.beginner}/> */}
-        <RunnerInfo />
-      </div>
+      <h1>Welcome to the long distance project.</h1> 
+      
+      <WeekCalendarBeginner beginner={this.state.beginner}/>
+      
+    </div>
     )
   }
 }

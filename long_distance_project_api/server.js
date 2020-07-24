@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const PORT = 3000
+const PORT = 3003
 const trainingController = require('./controllers/training_controller.js')
 
 

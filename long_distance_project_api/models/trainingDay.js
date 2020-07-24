@@ -1,7 +1,12 @@
 const mongoose = require('mongoose')
 
 const trainingDaySchema = mongoose.Schema({
-    distance: {type: String, required: true},
+    title: {type: String, required: true},
+    distance: {type: Number, default: 0},
+    time: {type: Number, default: 0},
+    week: {type: Number, default: 0},
+    day: {type: Number, default: 0}
 })
 
-module.exports = mongoose.model('Training Day', trainingDaySchema)
+module.exports = mongoose.model('TrainingDay', trainingDaySchema)
+
