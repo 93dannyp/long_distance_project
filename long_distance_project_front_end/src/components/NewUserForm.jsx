@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+let baseURL = "http://localhost:3003";
+
 
 export default class NewUserForm extends Component {
     //  why do I need state here? It won't work without it.
     state = {
-        username: "",
-        level: "",
+
+        username: '',
+        level: '',
+
+
     }
    
     handleChange = (event) => {
@@ -15,7 +20,7 @@ export default class NewUserForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();        
-        fetch(this.props.baseURL + '/users', {
+        fetch(this.props.baseURL+ '/users', {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username, //Why do I need "state" here? I don't need it in the form. Because I'm calling a function in here that is on the parent level? But wouldn't that mean I need props?
@@ -27,6 +32,8 @@ export default class NewUserForm extends Component {
         }).then(res => {
             return res.json();
         }).then(data => {
+            console.log((data))
+            // opportunity for duplicate username error handling
             this.props.addUser(data);
             this.setState({
                 username: '',
