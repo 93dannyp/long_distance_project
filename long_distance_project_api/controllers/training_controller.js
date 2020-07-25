@@ -20,7 +20,7 @@ training.get("/", (req, res) => {
   });
 });
 
-// Creat Route
+// Create Route
 training.post("/", (req, res) => {
   Training.create(req.body, (error, createdTraining) => {
     if (error) {
@@ -46,7 +46,8 @@ training.put("/:id", isAuthenticated, (req, res) => {
 });
 
 // Delete Route
-training.delete("/:id", isAuthenticated, (req, res) => {
+// taking out isAuthenticated gave us the ability to delete training workout from database
+training.delete("/:id", (req, res) => {
   Training.findByIdAndRemove(req.params.id, (err, deletedTraining) => {
     if (err) {
       res.status(400).json({ error: err.message });
