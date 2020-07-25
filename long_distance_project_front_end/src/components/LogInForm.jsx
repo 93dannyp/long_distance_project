@@ -15,7 +15,6 @@ export default class LogInForm extends Component {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username, //Why do I need "state" here? I don't need it in the form. Because I'm calling a function in here that is on the parent level? But wouldn't that mean I need props?
-                // level: this.state.level,
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -29,20 +28,41 @@ export default class LogInForm extends Component {
         });
     }
 
+    handleLogout = (currentUser) => {
+        console.log('in logOut()')
+        console.log(currentUser._id)
+        fetch(this.props.baseURL + '/users/' + currentUser._id, {
+            method: 'PUT',
+            body: JSON.stringify({isLoggedIn: !currentUser.isLoggedIn}),
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }).then(res => res.json())
+        .then(data => {
+            const copyUsers = [...this.props.users]
+            const findIndex = this.props.users.findIndex(currentUser => currentUser._id === data._id)
+            copyUsers[findIndex].isLoggedIn = data.isLoggedIn
+            this.setState({users: copyUsers})
+        })            
+    }
+
    
 
     render() {
-    
         return (
             <div>
-                {/* //if the user is not logged in, prompt them to, otherwise welcome them. We may want to include some way of revealing the user's training plan components based on this ternary, too*/}
+                {/* //if the user is logged in, reveal the user's training plan components based on this ternary, too*/}
 
                 <form onSubmit={(event) => this.handleLogin(event)}>
                         <label htmlFor="username">Username: </label>
-                        <input type="text" name="username" onChange={(evt) => this.handleChange(evt)} value={ this.props.username}/><br/>
+                        <input type="text" id="username" onChange={(evt) => this.handleChange(evt)} value={ this.props.username}/><br/>
                     
                     { this.props.currentUser.isLoggedIn ?
-                        <h6>Welcome, {this.props.currentUser.username}</h6> : <input type="submit" value="Please Log In"/>}
+                        <>
+                        <h6>Welcome, {this.props.currentUser.username}</h6>
+                        <button type="button" onClick={() => this.handleLogout(this.props.currentUser)}>Log Out</button>
+                        </>
+                        : <input type="submit" value="Please Log In"/>}
                     </form>
                         
             </div>
