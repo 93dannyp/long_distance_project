@@ -8,8 +8,8 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Routes
-// Index Route
-training.get("/", isAuthenticated, (req, res) => {
+// Index Route -- add back isAuthenticated
+training.get("/", (req, res) => {
   Training.find({}, (err, foundTraining) => {
     if (err) {
       res.status(400).json({ error: err.message });
@@ -28,8 +28,8 @@ training.post("/", (req, res) => {
   });
 });
 
-// Update Route
-training.put("/:id", isAuthenticated, (req, res) => {
+// Update Route -- add back isAuthenticated
+training.put("/:id", (req, res) => {
   Training.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -43,8 +43,8 @@ training.put("/:id", isAuthenticated, (req, res) => {
   );
 });
 
-// Delete Route
-training.delete("/:id", isAuthenticated, (req, res) => {
+// Delete Route -- add back isAuthenticated
+training.delete("/:id", (req, res) => {
   Training.findByIdAndRemove(req.params.id, (err, deletedTraining) => {
     if (err) {
       res.status(400).json({ error: err.message });
