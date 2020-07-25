@@ -2,30 +2,38 @@ const express = require("express");
 const User = require("../models/users");
 const sessionsRouter = express.Router();
 
-//NO INDEX ROUTE NEEDED
-
 //Upon submission of the log-in form check for username
 sessionsRouter.post("/", (req, res) => {
   User.findOne({ username: req.body.username }, (error, foundUser) => {
     //Check for an error in the query
     if (error) {
-      console.log(error);
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ Error: error.message });
     } else if (!foundUser) {
       console.log("in the !foundUser condition", error);
       //if user isn'found in db. Re-direct and message.
-      // console.log(req.body.username);
       res.status(400).json({ error });
     } else if (req.body.username === foundUser.username) {
       //If username matches
-      // foundUser.isLoggedIn = true;
-      // foundUser.save
       res.status(200).send(foundUser);
-      // req.session.currentUser = foundUser;
 
       console.log("Welcome", foundUser);
     } else {
       res.status(400).json({ error: error.message });
+    }
+  });
+});
+
+//PUT route for logging in. I don't know the ID though.
+sessionsRouter.put("/", (req, res) => {
+  User.findOne(req.body, (error, foundUser) => {
+    if (error) {
+      res.status(400).json({ Error: error.message });
+    } else {
+      console.log("got into the good place");
+      console.log("founduser1", foundUser);
+      foundUser.isLoggedIn = true;
+      console.log("founduser2", foundUser);
+      res.status(200).send(foundUser);
     }
   });
 });

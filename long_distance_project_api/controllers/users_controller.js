@@ -36,6 +36,16 @@ users.put("/:id", (req, res) => {
   );
 });
 
+//Secong PUT request for ID-less log-in
+users.put("/", (req, res) => {
+  User.findOne(req.body, { new: true }, (err, updatedUser) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(updatedUser);
+  });
+});
+
 //NO DELETE ROUTE NEEDED
 
 module.exports = users;
