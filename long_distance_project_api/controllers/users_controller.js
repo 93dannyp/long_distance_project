@@ -14,7 +14,8 @@ users.post("/", async (req, res) => {
   User.create(req.body, (error, createdUser) => {
     console.log("user is created", createdUser);
     if (error) {
-      res.status(400).json({ error: "username already created" });
+      console.log("Most likely this username already exists");
+      res.status(400).json({ error: error.message });
     }
     res.status(200).send(createdUser);
   });
@@ -33,6 +34,16 @@ users.put("/:id", (req, res) => {
       res.status(200).json(updatedUser);
     }
   );
+});
+
+//Secong PUT request for ID-less log-in
+users.put("/", (req, res) => {
+  User.findOne(req.body, { new: true }, (err, updatedUser) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(updatedUser);
+  });
 });
 
 //NO DELETE ROUTE NEEDED

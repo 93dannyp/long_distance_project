@@ -1,20 +1,14 @@
-
-import React from 'react'
-import beginner from './data/beginner.js'
-import WeekCalendarBeginner from './components/WeekCalendarBeginner.jsx';
-import { Switch, Route } from 'react-router-dom'
-import Home from './components/Home'
-import About from './components/About'
-import NavBar from './components/NavBar'
+import React from "react";
+import beginner from "./data/beginner.js";
+import WeekCalendarBeginner from "./components/WeekCalendarBeginner.jsx";
+import { Switch, Route } from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
+import NavBar from "./components/NavBar";
 import History from './components/History'
-
-
-
-
 import RunnerInfo from './components/RunnerInfo.jsx';
 import TodaysWorkout from './components/TodaysWorkout.jsx';
-
-
+import RunnerInfo from "./components/RunnerInfo.jsx";
 import NewUserForm from "./components/NewUserForm.jsx";
 import LogInForm from "./components/LogInForm.jsx";
 
@@ -27,19 +21,27 @@ class App extends React.Component {
     message: 'Hello',
     trainingDay: [],
     users: [],
-    signUpUser: '',
+    currentUser: [],
   };
-    
-  getTrainingDay = () => {
-    fetch(baseURL + '/training').then(res => {
-      return res.json();
-    }).then(data => {
-      console.log(data)
-      this.setState({
-        trainingDay: data,
-      });
+  //Callback function to get currentUser from NewUserForm to App.js
+  callbackFunction = (currentUser) => {
+    this.setState({
+      currentUser: currentUser,
     });
-  }
+  };
+
+
+  getTrainingDay = () => {  
+    fetch(baseURL + "/training")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        this.setState({
+          trainingDay: data,
+        });
+      });
+  };
 
   addTrainingDay = (newTrainingDay) => {
     console.log(newTrainingDay)
@@ -47,12 +49,10 @@ class App extends React.Component {
     copyTrainingDay.push(newTrainingDay);
     this.setState({
       trainingDay: copyTrainingDay,
-      
-      
     });
-    console.log(copyTrainingDay)
   }
 
+  
   deleteTrainingDay = (id) => {
     console.log(id)
     fetch(baseURL + '/training/' + id, {
@@ -68,13 +68,11 @@ class App extends React.Component {
 
 
   addUser = (newUser) => {
-    console.log(newUser)
     const copyUser = [...this.state.users];
     copyUser.push(newUser);
     this.setState({
       users: copyUser,
     });
-    console.log(newUser)
   };
 
   checkOffDay = (day) => {
@@ -91,21 +89,32 @@ class App extends React.Component {
       <div>
         <NavBar />
         <Switch>
+
+          {/* HOME PAGE */}
           <Route exact path='/' component={Home}/>
+          {/* TRAINING CALENDAR */}
           <Route exact path='/calendar' render={() => <WeekCalendarBeginner beginner={this.state.beginner} /> } />
+          {/* ABOUT PAGE */}
           <Route exact path='/about' render={() => <About message={this.state.message} />} />
-          <Route exact path='/signup' render={() => <NewUserForm baseURL={baseURL} addUser={this.addUser} /> } />
+          {/* SIGN UP PAGE */}
+          <Route exact path='/signup' render={() => <NewUserForm baseURL={baseURL} addUser={this.addUser} users={this.state.users}
+                parentCallback={this.callbackFunction}
+                currentUser={this.state.currentUser}/> } />
+          {/* LOGIN PAGE */}
+          <Route exact path='/login' render={() => <LogInForm baseURL={baseURL} handleChange={this.handleChange} users={this.state.users}
+          currentUser={this.state.currentUser} /> } />
+
+          {/* ERROR PAGE */}
           <Route component={Error}/>
         </Switch>
         <h1>Welcome to the long distance project.</h1>
-        
-        <LogInForm baseURL={baseURL} handleChange={this.handleChange} />
+
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
         <History trainingDay={ this.state.trainingDay } />
-
 
       </div>
     );
   }
 }
+
 export default App;
