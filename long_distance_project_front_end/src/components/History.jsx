@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import EditDataForm from './EditDataForm.jsx'
 
 export default class History extends Component {
 
@@ -18,7 +20,10 @@ export default class History extends Component {
                                 <td>Week: { trainingDay.week }</td>
                                 <td>Week: { trainingDay.day }</td>
                                 <td>
-                                <button onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>Delete</button>
+                                    <Link className='nav-link' to='/edit' key={trainingDay._id}>EDIT</Link>
+                                </td>
+                                <td>
+                                <button onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>DELETE</button>
                                 </td>
                                 </tr>
                                 
@@ -31,3 +36,4 @@ export default class History extends Component {
         )
     }
 }
+
