@@ -25,13 +25,14 @@ sessionsRouter.post("/", (req, res) => {
 
 //PUT route for logging in. I don't know the ID though.
 sessionsRouter.put("/", (req, res) => {
-  User.findOne(req.body, (error, foundUser) => {
+  User.findOne(req.body, async (error, foundUser) => {
     if (error) {
       res.status(400).json({ Error: error.message });
     } else {
       console.log("got into the good place");
       console.log("founduser1", foundUser);
       foundUser.isLoggedIn = true;
+      foundUser = await foundUser.save();
       console.log("founduser2", foundUser);
       res.status(200).send(foundUser);
     }
