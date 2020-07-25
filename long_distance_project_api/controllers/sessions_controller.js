@@ -4,28 +4,28 @@ const sessionsRouter = express.Router();
 
 //NO INDEX ROUTE NEEDED
 
-//Upon submission of the log-in form ...
+//Upon submission of the log-in form check for username
 sessionsRouter.post("/", (req, res) => {
-  //see if the username exists in the data base.
-  //if it doesn't, send an alert that that name doesn't exist
-  //if it does, continue with the fetch track below
-
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
+  User.findOne({ username: req.body.username }, (error, foundUser) => {
     //Check for an error in the query
-    if (err) {
-      console.log(err);
-      alert("Something bad happened in the database");
+    if (error) {
+      console.log(error);
+      res.status(400).json({ error: error.message });
     } else if (!foundUser) {
+      console.log("in the !foundUser condition", error);
       //if user isn'found in db. Re-direct and message.
-      console.log(req.body.username);
-      console.log("Sorry, user not found."); // leave as req.body.username?
+      // console.log(req.body.username);
+      res.status(400).json({ error });
     } else if (req.body.username === foundUser.username) {
       //If username matches
-      req.session.currentUser = foundUser;
-      foundUser.isLoggedIn = true;
+      // foundUser.isLoggedIn = true;
+      // foundUser.save
+      res.status(200).send(foundUser);
+      // req.session.currentUser = foundUser;
+
       console.log("Welcome", foundUser);
     } else {
-      console.log("some mysterious 4th thing happened");
+      res.status(400).json({ error: error.message });
     }
   });
 });

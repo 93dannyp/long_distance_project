@@ -14,7 +14,8 @@ users.post("/", async (req, res) => {
   User.create(req.body, (error, createdUser) => {
     console.log("user is created", createdUser);
     if (error) {
-      res.status(400).json({ error: "username already created" });
+      console.log("Most likely this username already exists");
+      res.status(400).json({ error: error.message });
     }
     res.status(200).send(createdUser);
   });
