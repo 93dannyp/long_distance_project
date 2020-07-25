@@ -57,7 +57,7 @@ class App extends React.Component {
     fetch(baseURL + '/training/' + id, {
       method: 'DELETE'
     }).then( response => {
-      const findIndex = this.state.holidays.findIndex(trainingDay => trainingDay._id === id)
+      const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === id)
       const copyTrainingDay = [...this.state.trainingDay]
       copyTrainingDay.splice(findIndex, 1)
       this.setState({trainingDay: copyTrainingDay})
@@ -88,7 +88,6 @@ class App extends React.Component {
       <div>
         <NavBar />
         <Switch>
-
           {/* HOME PAGE */}
           <Route exact path='/' component={Home}/>
           {/* TRAINING CALENDAR */}
@@ -102,15 +101,13 @@ class App extends React.Component {
           {/* LOGIN PAGE */}
           <Route exact path='/login' render={() => <LogInForm baseURL={baseURL} handleChange={this.handleChange} users={this.state.users}
           currentUser={this.state.currentUser} /> } />
-
           {/* ERROR PAGE */}
           <Route component={Error}/>
         </Switch>
         <h1>Welcome to the long distance project.</h1>
 
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
-        <History trainingDay={ this.state.trainingDay } />
-
+        <History deleteTrainingDay={this.deleteTrainingDay} trainingDay={ this.state.trainingDay } />
       </div>
     );
   }
