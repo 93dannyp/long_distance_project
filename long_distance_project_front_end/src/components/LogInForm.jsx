@@ -9,7 +9,7 @@ export default class LogInForm extends Component {
 
     handleChange = (event) => {
         this.setState({
-          username: event.target.value,
+            [event.currentTarget.id]: event.target.value,
         });
       };
 

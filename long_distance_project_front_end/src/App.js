@@ -16,17 +16,13 @@ let baseURL = "http://localhost:3003";
 class App extends React.Component {
   state = {
     beginner: beginner,
-
     completedDays: [],    
     message: 'Hello',
-
-
-     
     trainingDay: [],
-
     users: [],
     signUpUser: '',
   };
+
     
   getTrainingDay = () => {
     fetch(baseURL + '/training').then(res => {
@@ -66,23 +62,25 @@ class App extends React.Component {
       <div>
         <NavBar />
         <Switch>
+          {/* HOME PAGE */}
           <Route exact path='/' component={Home}/>
+          {/* TRAINING CALENDAR */}
           <Route exact path='/calendar' render={() => <WeekCalendarBeginner beginner={this.state.beginner} /> } />
+          {/* ABOUT PAGE */}
           <Route exact path='/about' render={() => <About message={this.state.message} />} />
+          {/* SIGN UP PAGE */}
           <Route exact path='/signup' render={() => <NewUserForm baseURL={baseURL} addUser={this.addUser} /> } />
+          {/* LOGIN PAGE */}
+          <Route exact path='/login' render={() => <LogInForm baseURL={baseURL} handleChange={this.handleChange} /> } />
+
+          {/* ERROR PAGE */}
           <Route component={Error}/>
         </Switch>
         <h1>Welcome to the long distance project.</h1>
-
-
-
-        
-        <LogInForm baseURL={baseURL} handleChange={this.handleChange} />
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
-
-
       </div>
     );
   }
 }
+
 export default App;
