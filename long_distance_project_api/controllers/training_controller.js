@@ -11,7 +11,7 @@ const isAuthenticated = (req, res, next) => {
 // Index Route
 // isAuthenticated privents history.jsx from rendring 
 //when isAuthenticated is deleted history.jsx renders
-training.get("/", isAuthenticated, (req, res) => {
+training.get("/", (req, res) => {
   Training.find({}, (err, foundTraining) => {
     if (err) {
       res.status(400).json({ error: err.message });
@@ -21,7 +21,7 @@ training.get("/", isAuthenticated, (req, res) => {
 });
 
 // Creat Route
-training.post("/", isAuthenticated, (req, res) => {
+training.post("/", (req, res) => {
   Training.create(req.body, (error, createdTraining) => {
     if (error) {
       res.status(400).json({ error: error.message });
