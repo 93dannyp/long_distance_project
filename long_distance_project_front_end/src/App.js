@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import About from './components/About'
 import NavBar from './components/NavBar'
+import History from './components/History'
 
 
 
@@ -22,14 +23,9 @@ let baseURL = "http://localhost:3003";
 class App extends React.Component {
   state = {
     beginner: beginner,
-
     completedDays: [],    
     message: 'Hello',
-
-
-     
     trainingDay: [],
-
     users: [],
     signUpUser: '',
   };
@@ -38,6 +34,7 @@ class App extends React.Component {
     fetch(baseURL + '/training').then(res => {
       return res.json();
     }).then(data => {
+      console.log(data)
       this.setState({
         trainingDay: data,
       });
@@ -45,13 +42,30 @@ class App extends React.Component {
   }
 
   addTrainingDay = (newTrainingDay) => {
+    console.log(newTrainingDay)
     const copyTrainingDay = [...this.state.trainingDay];
     copyTrainingDay.push(newTrainingDay);
     this.setState({
       trainingDay: copyTrainingDay,
       
+      
     });
+    console.log(copyTrainingDay)
   }
+
+  deleteTrainingDay = (id) => {
+    console.log(id)
+    fetch(baseURL + '/training/' + id, {
+      method: 'DELETE'
+    }).then( response => {
+      const findIndex = this.state.holidays.findIndex(trainingDay => trainingDay._id === id)
+      const copyTrainingDay = [...this.state.trainingDay]
+      copyTrainingDay.splice(findIndex, 1)
+      this.setState({trainingDay: copyTrainingDay})
+    })
+  }
+
+
 
   addUser = (newUser) => {
     console.log(newUser)
@@ -67,6 +81,11 @@ class App extends React.Component {
     this.setState({ completedDays: [day, ...this.state.completedDays] });
   };
 
+  componentDidMount = () => {
+    this.getTrainingDay();
+}
+
+
   render() {
     return (
       <div>
@@ -79,12 +98,10 @@ class App extends React.Component {
           <Route component={Error}/>
         </Switch>
         <h1>Welcome to the long distance project.</h1>
-
-
-
         
         <LogInForm baseURL={baseURL} handleChange={this.handleChange} />
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
+        <History trainingDay={ this.state.trainingDay } />
 
 
       </div>
