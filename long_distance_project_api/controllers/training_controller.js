@@ -9,7 +9,9 @@ const isAuthenticated = (req, res, next) => {
 
 // Routes
 // Index Route
-training.get("/", isAuthenticated, (req, res) => {
+// isAuthenticated privents history.jsx from rendring 
+//when isAuthenticated is deleted history.jsx renders
+training.get("/", (req, res) => {
   Training.find({}, (err, foundTraining) => {
     if (err) {
       res.status(400).json({ error: err.message });

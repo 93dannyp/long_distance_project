@@ -15,6 +15,9 @@ class TodaysWorkout extends Component {
         });
     }
 
+
+
+
     handleSubmit = (event) => {
         event.preventDefault();
         fetch(this.props.baseURL + '/training', {
@@ -48,31 +51,31 @@ class TodaysWorkout extends Component {
 
     render () {
         return (
-                <form onSubmit={ (evt) => this.handleSubmit(evt) }>
+                <form onSubmit={ (event) => this.handleSubmit(event) }>
 
                 <label htmlFor="title">Title: </label>
                 <input type="text" id="title"
-                    onChange={ (evt) => this.handleChange(evt) }
+                    onChange={ (event) => this.handleChange(event) }
                     value={ this.state.title }/><br />
 
                 <label htmlFor="distance">Distance: </label>
                 <input type="number" id="distance"
-                    onChange={ (evt) => this.handleChange(evt) }
+                    onChange={ (event) => this.handleChange(event) }
                     value={ this.state.distance }/><br />
                 
                 <label htmlFor="time">Time: </label>
                 <input type="number" id="time"
-                    onChange={ (evt) => this.handleChange(evt) }
+                    onChange={ (event) => this.handleChange(event) }
                     value={ this.state.time }/><br />
 
                 <label htmlFor="week">Week: </label>
                 <input type="number" id="week"
-                    onChange={ (evt) => this.handleChange(evt) }
+                    onChange={ (event) => this.handleChange(event) }
                     value={ this.state.week }/><br />
                 
                 <label htmlFor="day">Day: </label>
                 <input type="number" id="day"
-                    onChange={ (evt) => this.handleChange(evt) }
+                    onChange={ (event) => this.handleChange(event) }
                     value={ this.state.day }/><br />
 
                 <input type="submit" value="Submit your day!"/>

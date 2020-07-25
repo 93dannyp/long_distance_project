@@ -5,15 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import NavBar from "./components/NavBar";
-
-
-import React from 'react'
-import beginner from './data/beginner.js'
-import WeekCalendarBeginner from './components/WeekCalendarBeginner.jsx';
-import { Switch, Route } from 'react-router-dom'
-import Home from './components/Home'
-import About from './components/About'
-import NavBar from './components/NavBar'
+import History from './components/History'
 import RunnerInfo from './components/RunnerInfo.jsx';
 import TodaysWorkout from './components/TodaysWorkout.jsx';
 import RunnerInfo from "./components/RunnerInfo.jsx";
@@ -25,7 +17,6 @@ let baseURL = "http://localhost:3003";
 class App extends React.Component {
   state = {
     beginner: beginner,
-
     completedDays: [],    
     message: 'Hello',
     trainingDay: [],
@@ -40,7 +31,7 @@ class App extends React.Component {
   };
 
 
-  getTrainingDay = () => {
+  getTrainingDay = () => {  
     fetch(baseURL + "/training")
       .then((res) => {
         return res.json();
@@ -53,12 +44,28 @@ class App extends React.Component {
   };
 
   addTrainingDay = (newTrainingDay) => {
+    console.log(newTrainingDay)
     const copyTrainingDay = [...this.state.trainingDay];
     copyTrainingDay.push(newTrainingDay);
     this.setState({
       trainingDay: copyTrainingDay,
     });
-  };
+  }
+
+  
+  deleteTrainingDay = (id) => {
+    console.log(id)
+    fetch(baseURL + '/training/' + id, {
+      method: 'DELETE'
+    }).then( response => {
+      const findIndex = this.state.holidays.findIndex(trainingDay => trainingDay._id === id)
+      const copyTrainingDay = [...this.state.trainingDay]
+      copyTrainingDay.splice(findIndex, 1)
+      this.setState({trainingDay: copyTrainingDay})
+    })
+  }
+
+
 
   addUser = (newUser) => {
     const copyUser = [...this.state.users];
@@ -71,6 +78,11 @@ class App extends React.Component {
   checkOffDay = (day) => {
     this.setState({ completedDays: [day, ...this.state.completedDays] });
   };
+
+  componentDidMount = () => {
+    this.getTrainingDay();
+}
+
 
   render() {
     return (
@@ -96,7 +108,9 @@ class App extends React.Component {
           <Route component={Error}/>
         </Switch>
         <h1>Welcome to the long distance project.</h1>
+
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
+        <History trainingDay={ this.state.trainingDay } />
 
       </div>
     );
