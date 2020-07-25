@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-let baseURL = "http://localhost:3003";
-
+// import LogInForm from './LogInForm'
 
 export default class NewUserForm extends Component {
-    //  why do I need state here? It won't work without it.
-    state = {
 
-        username: '',
-        level: '',
+    sendData = () => {
+        this.props.parentCallback(this.state.currentUser);
+   }
+// render() { 
+// //you can call function sendData whenever you'd like to send data from child component to Parent component.
+//    }
 
-
-    }
-   
     handleChange = (event) => {
         this.setState({
           [event.currentTarget.id]: event.currentTarget.value,
@@ -23,8 +21,9 @@ export default class NewUserForm extends Component {
         fetch(this.props.baseURL+ '/users', {
             method: 'POST',
             body: JSON.stringify({
-                username: this.state.username, //Why do I need "state" here? I don't need it in the form. Because I'm calling a function in here that is on the parent level? But wouldn't that mean I need props?
+                username: this.state.username,
                 level: this.state.level,
+                isLoggedIn: true,
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -32,13 +31,16 @@ export default class NewUserForm extends Component {
         }).then(res => {
             return res.json();
         }).then(data => {
-            console.log((data))
+            // console.log((data))
             // opportunity for duplicate username error handling
             this.props.addUser(data);
             this.setState({
-                username: '',
-                level: '',
+                currentUser: data
             });
+            this.sendData();
+            console.log(this.state.currentUser)
+            console.log('in handle submit')
+           
         });
     }
     
@@ -48,11 +50,14 @@ export default class NewUserForm extends Component {
                 <h1>Create Your User Profile</h1>
                 <form onSubmit={(evt) => this.handleSubmit(evt)}>
                     <label htmlFor="username">Username: </label>
-                    <input type="text" id="username" onChange={(evt) => this.handleChange(evt)} value={ this.state.username} /><br/>
+                    <input type="text" id="username" onChange={(evt) => this.handleChange(evt)} value={ this.props.username} /><br/>
                     <label htmlFor="level">Skill Level: </label>
-                    <input type="text" id="level" onChange={(evt) => this.handleChange(evt)} value={ this.state.level}/><br/>
+                    <input type="text" id="level" onChange={(evt) => this.handleChange(evt)} value={ this.props.level}/><br/>
                     <input type="submit" value="Create-User"/>
                 </form>
+                
+                
+
             </div>
         )
     }
