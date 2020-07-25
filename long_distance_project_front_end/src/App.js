@@ -6,7 +6,6 @@ import Home from "./components/Home";
 import About from "./components/About";
 import NavBar from "./components/NavBar";
 import History from './components/History'
-import RunnerInfo from './components/RunnerInfo.jsx';
 import TodaysWorkout from './components/TodaysWorkout.jsx';
 import RunnerInfo from "./components/RunnerInfo.jsx";
 import NewUserForm from "./components/NewUserForm.jsx";
