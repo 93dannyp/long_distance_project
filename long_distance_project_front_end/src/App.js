@@ -6,7 +6,6 @@ import Home from "./components/Home";
 import About from "./components/About";
 import NavBar from "./components/NavBar";
 import History from './components/History'
-import RunnerInfo from './components/RunnerInfo.jsx';
 import TodaysWorkout from './components/TodaysWorkout.jsx';
 import RunnerInfo from "./components/RunnerInfo.jsx";
 import NewUserForm from "./components/NewUserForm.jsx";
@@ -58,7 +57,7 @@ class App extends React.Component {
     fetch(baseURL + '/training/' + id, {
       method: 'DELETE'
     }).then( response => {
-      const findIndex = this.state.holidays.findIndex(trainingDay => trainingDay._id === id)
+      const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === id)
       const copyTrainingDay = [...this.state.trainingDay]
       copyTrainingDay.splice(findIndex, 1)
       this.setState({trainingDay: copyTrainingDay})
@@ -110,7 +109,7 @@ class App extends React.Component {
         <h1>Welcome to the long distance project.</h1>
 
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
-        <History trainingDay={ this.state.trainingDay } />
+        <History deleteTrainingDay={ this.deleteTrainingDay } trainingDay={ this.state.trainingDay } />
 
       </div>
     );

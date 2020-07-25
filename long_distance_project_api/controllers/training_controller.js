@@ -46,7 +46,7 @@ training.put("/:id", isAuthenticated, (req, res) => {
 });
 
 // Delete Route
-training.delete("/:id", isAuthenticated, (req, res) => {
+training.delete("/:id", (req, res) => {
   Training.findByIdAndRemove(req.params.id, (err, deletedTraining) => {
     if (err) {
       res.status(400).json({ error: err.message });
