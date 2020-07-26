@@ -1,7 +1,7 @@
 const express = require("express");
 const training = express.Router();
-
 const Training = require("../models/trainingDay.js");
+const User = require("../models/users.js");
 
 const isAuthenticated = (req, res, next) => {
   req.session.currentUser ? next() : res.redirect("/sessions/new");
@@ -21,13 +21,19 @@ training.get("/", (req, res) => {
   });
 });
 
-// Creat Route
+// Creat Route -- // possible we need _id here.
 training.post("/", (req, res) => {
-  Training.create(req.body, (error, createdTraining) => {
-    if (error) {
-      res.status(400).json({ error: error.message });
-    }
-    res.status(200).send(createdTraining);
+  User.findById(req.body.currentUserId, (err, foundUser) => {
+    console.log(foundUser);
+    Training.create(req.body, (error, createdTraining) => {
+      foundUser.trainingHistory.push(createdTraining);
+      foundUser.save((err, data) => {
+        if (error) {
+          res.status(400).json({ error: error.message });
+        }
+        res.status(200).send(createdTraining);
+      });
+    });
   });
 });
 

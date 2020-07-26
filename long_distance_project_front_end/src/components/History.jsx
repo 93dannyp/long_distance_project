@@ -16,7 +16,7 @@ export default class History extends Component {
                                 <td>Distance: { trainingDay.distance }</td>
                                 <td>Time:  { trainingDay.time }</td>
                                 <td>Week: { trainingDay.week }</td>
-                                <td>Week: { trainingDay.day }</td>
+                                <td>Day: { trainingDay.day }</td>
                                 </tr>
                                 )
                             })
