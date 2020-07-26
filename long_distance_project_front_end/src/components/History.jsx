@@ -14,13 +14,13 @@ export default class History extends Component {
                         this.props.trainingDay.map(trainingDay => {
                             return (
                                 <tr key={ trainingDay._id }>
-                                <td>Title: { trainingDay.title }</td>
-                                <td>Distance: { trainingDay.distance }</td>
-                                <td>Time:  { trainingDay.time }</td>
-                                <td>Week: { trainingDay.week }</td>
-                                <td>Week: { trainingDay.day }</td>
+                                <td className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Title: { trainingDay.title }</td>
+                                <td className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Distance: { trainingDay.distance }</td>
+                                <td className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Time:  { trainingDay.time }</td>
+                                <td className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Week: { trainingDay.week }</td>
+                                <td className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Week: { trainingDay.day }</td>
                                 <td>
-                                    <Link className='nav-link' to='/edit' key={trainingDay._id}>EDIT</Link>
+                                    <a key={trainingDay._id} onClick={() => this.props.toggleGoalWasMet(trainingDay)} className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Goal Met?</a>
                                 </td>
                                 <td>
                                 <button onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>DELETE</button>

@@ -72,26 +72,44 @@ class App extends React.Component {
     });
   };
 
-  editTrainingDay = (data) => {
+  toggleGoalWasMet = (data) => {
     console.log(data)
-    console.log(data._id)
     fetch(baseURL + '/training/' + data._id, {
       method: 'PUT',
-      body: JSON.stringify(data
-      ),
+      body: JSON.stringify({goalWasMet: !data.goalWasMet}),
       headers: {
         'Content-Type' : 'application/json'
       }
     }).then(res => res.json())
     .then(resJson => {
-         const copyTrainingDay = [...this.state.trainingDay]
-         console.log(this.state.trainingDay)
-          const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === resJson._id)
-          console.log(findIndex)
-          copyTrainingDay[findIndex].title = resJson.title
-          this.setState({trainingDay: copyTrainingDay})
+         const copyTrainingDays = [...this.state.trainingDay]
+          const findIndex = this.state.trainingDay.findIndex(data => data._id === resJson._id)
+          copyTrainingDays[findIndex].goalWasMet = resJson.goalWasMet
+          this.setState({trainingDay: copyTrainingDays})
     })
+
   }
+
+  // editTrainingDay = (data) => {
+  //   console.log(data)
+  //   console.log(data._id)
+  //   fetch(baseURL + '/training/' + data._id, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(data
+  //     ),
+  //     headers: {
+  //       'Content-Type' : 'application/json'
+  //     }
+  //   }).then(res => res.json())
+    // .then(resJson => {
+    //      const copyTrainingDay = [...this.state.trainingDay]
+    //      console.log(this.state.trainingDay)
+    //       const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === resJson._id)
+    //       console.log(findIndex)
+    //       copyTrainingDay[findIndex].title = resJson.title
+    //       this.setState({trainingDay: copyTrainingDay})
+    // })
+  // }
 
   checkOffDay = (day) => {
     this.setState({ completedDays: [day, ...this.state.completedDays] });
@@ -134,7 +152,7 @@ class App extends React.Component {
         <h1>Welcome to the long distance project.</h1>
           
         
-        <History editTrainingDay={this.editTrainingDay} deleteTrainingDay={this.deleteTrainingDay} trainingDay={ this.state.trainingDay } />
+        <History toggleGoalWasMet={this.toggleGoalWasMet} editTrainingDay={this.editTrainingDay} deleteTrainingDay={this.deleteTrainingDay} trainingDay={ this.state.trainingDay } />
       </div>
     )
   }
