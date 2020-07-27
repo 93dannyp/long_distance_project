@@ -12,12 +12,8 @@ code {
     monospace;
 }
 
-.weekCalendar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 50px;
-  padding-left: 300px;
-  background-color: rgb(155, 159, 102);
 
 
+.goalWasMet {
+  text-decoration: line-through;
 }
