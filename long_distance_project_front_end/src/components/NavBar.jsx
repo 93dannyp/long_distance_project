@@ -21,9 +21,6 @@ export default function NavBar() {
                         <Link className='nav-link' to='/recordworkout'>RECORD</Link>
                     </div>
                     <div className='navbar-nav active'>
-                        <Link className='nav-link' to='/about'>ABOUT</Link>
-                    </div>
-                    <div className='navbar-nav active'>
                         <Link className='nav-link' to='/signup'>SIGN UP</Link>
                     </div>
                     <div className='navbar-nav active'>
