@@ -16,7 +16,7 @@ class WeekCalendarBeginner extends Component {
 
     render () {
         return (
-            <div>
+                <div>
                 <section className='jumbotron text-center'>
                     <div className='container'>
                     <h3>The Road Ahead</h3>

@@ -6,7 +6,8 @@ class TodaysWorkout extends Component {
         distance: '0',
         time: '0',
         week: '0',
-        day: '0'
+        day: '0',
+        goalWasMet: false,
     }
 
     handleChange = (event) => {
@@ -27,6 +28,7 @@ class TodaysWorkout extends Component {
                 time: this.state.time,
                 week: this.state.week,
                 day: this.state.day,
+                goalWasMet: this.state.goalWasMet,
             }),
             headers: {
                 'Content-Type': 'application/json',
