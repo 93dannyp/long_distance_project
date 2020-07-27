@@ -178,7 +178,18 @@ class App extends React.Component {
         <NavBar />
         <Switch>
           {/* HOME PAGE */}
-          <Route exact path="/" component={Home} />
+          <Route exact path="/"
+          render={() => (
+          <History
+          toggleGoalWasMet={this.toggleGoalWasMet}
+          editTrainingDay={this.editTrainingDay}
+          users={this.state.users}
+          trainingDay={this.state.trainingDay}
+          currentUser={this.state.currentUser}
+          deleteTrainingDay={this.deleteTrainingDay}
+        /> )}
+        />
+
           {/* TRAINING CALENDAR */}
           <Route
             exact
@@ -211,7 +222,7 @@ class App extends React.Component {
           
           
           {/* INPUT WORKOUT PAGE */}
-          <Route exact path='/recordworkout' render={() => <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay} editTrainingDay={this.editTrainingDay} /> } />
+          <Route exact path='/recordworkout' render={() => <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay} editTrainingDay={this.editTrainingDay} currentUser={this.state.currentUser} /> } />
         
           {/* EDIT WORKOUT PAGE */}
           <Route exact path='/edit' baseURL={ baseURL } component={ EditDataForm } render={() => <EditDataForm editTrainingDay={this.editTrainingDay} users={this.state.users} currentUser={this.state.currentUser} handleChange={this.handleChange} /> } />
@@ -235,19 +246,8 @@ class App extends React.Component {
           {/* ERROR PAGE */}
           <Route component={Error} />
         </Switch>
-        <TodaysWorkout
-          baseURL={baseURL}
-          addTrainingDay={this.addTrainingDay}
-          currentUser={this.state.currentUser}
-        />
-        <History
-          toggleGoalWasMet={this.toggleGoalWasMet}
-          editTrainingDay={this.editTrainingDay}
-          users={this.state.users}
-          trainingDay={this.state.trainingDay}
-          currentUser={this.state.currentUser}
-          deleteTrainingDay={this.deleteTrainingDay}
-        />
+        
+        
       </div>
     )
   }
