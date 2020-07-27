@@ -149,7 +149,6 @@ class App extends React.Component {
           {/* ERROR PAGE */}
           <Route component={Error}/>
         </Switch>
-        <h1>Welcome to the long distance project.</h1>
           
         
         <History toggleGoalWasMet={this.toggleGoalWasMet} editTrainingDay={this.editTrainingDay} deleteTrainingDay={this.deleteTrainingDay} trainingDay={ this.state.trainingDay } />

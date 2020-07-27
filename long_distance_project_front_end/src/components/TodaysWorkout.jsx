@@ -15,9 +15,6 @@ class TodaysWorkout extends Component {
         });
     }
 
-
-
-
     handleSubmit = (event) => {
         event.preventDefault();
         fetch(this.props.baseURL + '/training', {
@@ -45,9 +42,6 @@ class TodaysWorkout extends Component {
             });
         });
     }
-
-
-
 
     render () {
         return (
