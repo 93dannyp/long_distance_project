@@ -6,9 +6,7 @@ export default class NewUserForm extends Component {
     sendData = () => {
         this.props.parentCallback(this.state.currentUser);
    }
-// render() { 
-// //you can call function sendData whenever you'd like to send data from child component to Parent component.
-//    }
+
 
     handleChange = (event) => {
         this.setState({

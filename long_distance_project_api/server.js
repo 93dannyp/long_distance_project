@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -10,13 +10,10 @@ const userController = require("./controllers/users_controller.js");
 
 //Port
 
-const PORT = process.env.PORT 
+const PORT = process.env.PORT;
 
 //Database
 const mogodbURI = process.env.MONGODB_URI;
-
-
-
 
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>
