@@ -1,13 +1,29 @@
 import React, { Component } from 'react'
 
 export default class History extends Component {
+    
 
+returnCurrentUser = () => {
+
+    this.props.currentUser.trainingHistory.map(trainingDay => {
+        console.log(trainingDay.title)
+    }) 
+    // console.log(this.props.currentUser.trainingHistory.map(trainingDay => {
+    //     return trainingDay.title
+    // })) 
+    // return Object.entries(this.props.currentUser);
+
+}
 
     render() {
         return (
             <div>
                 <table>
                     <tbody>
+
+                        { this.returnCurrentUser() }
+                  
+
                         {
                         this.props.trainingDay.map(trainingDay => {
                             return (
@@ -25,6 +41,7 @@ export default class History extends Component {
                                 )
                             })
                         }
+
                     </tbody>
                 </table>
             </div>
