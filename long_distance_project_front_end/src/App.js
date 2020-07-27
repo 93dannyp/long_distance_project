@@ -193,7 +193,11 @@ class App extends React.Component {
           addTrainingDay={this.addTrainingDay}
           currentUser={this.state.currentUser}
         />
-        <History trainingDay={this.state.trainingDay} />
+        <History
+          users={this.state.users}
+          trainingDay={this.state.trainingDay}
+          currentUser={this.state.currentUser}
+        />
       </div>
     );
   }
