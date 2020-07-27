@@ -88,8 +88,9 @@ class App extends React.Component {
           copyTrainingDays[findIndex].goalWasMet = resJson.goalWasMet
           this.setState({trainingDay: copyTrainingDays})
     })
-
   }
+  
+   //////////////////////////////////////////////////////////////////////////////////
 
   // editTrainingDay = (data) => {
   //   console.log(data)
@@ -234,13 +235,14 @@ class App extends React.Component {
           {/* ERROR PAGE */}
           <Route component={Error} />
         </Switch>
-
         <TodaysWorkout
           baseURL={baseURL}
           addTrainingDay={this.addTrainingDay}
           currentUser={this.state.currentUser}
         />
         <History
+          toggleGoalWasMet={this.toggleGoalWasMet}
+          editTrainingDay={this.editTrainingDay}
           users={this.state.users}
           trainingDay={this.state.trainingDay}
           currentUser={this.state.currentUser}
