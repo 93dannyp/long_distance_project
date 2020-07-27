@@ -8,8 +8,9 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Routes
+// Index Route -- add back isAuthenticated
 // Index Route
-// isAuthenticated privents history.jsx from rendring 
+// isAuthenticated privents history.jsx from rendring
 //when isAuthenticated is deleted history.jsx renders
 training.get("/", (req, res) => {
   Training.find({}, (err, foundTraining) => {
@@ -20,7 +21,7 @@ training.get("/", (req, res) => {
   });
 });
 
-// Creat Route
+// Create Route
 training.post("/", (req, res) => {
   Training.create(req.body, (error, createdTraining) => {
     if (error) {
@@ -30,8 +31,8 @@ training.post("/", (req, res) => {
   });
 });
 
-// Update Route
-training.put("/:id", isAuthenticated, (req, res) => {
+// Update Route -- add back isAuthenticated
+training.put("/:id", (req, res) => {
   Training.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -45,7 +46,10 @@ training.put("/:id", isAuthenticated, (req, res) => {
   );
 });
 
+
 // Delete Route
+// taking out isAuthenticated gave us the ability to delete training workout from database
+
 training.delete("/:id", (req, res) => {
   Training.findByIdAndRemove(req.params.id, (err, deletedTraining) => {
     if (err) {

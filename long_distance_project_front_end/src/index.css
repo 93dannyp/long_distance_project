@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.weekCalendar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 50px;
+  padding-left: 300px;
+  background-color: rgb(155, 159, 102);
+
+
+}

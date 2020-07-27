@@ -17,7 +17,7 @@ class WeekCalendarBeginner extends Component {
 
     render () {
         return (
-            <div>
+            <div class="weekCalendar">
                 <h3>The Week Ahead:</h3>
                 {this.props.beginner.map((beginner, index) => {
                     return <div key={index}>
@@ -26,17 +26,15 @@ class WeekCalendarBeginner extends Component {
                             return <div key={subindex}>
                                 <ul onClick={ () => {this.toggleComplete()}}>
                                     <li>Day: {weekDays.day}</li>
-                                    
                                     <li>Workout: {weekDays.run}</li>
                                     <li>Complete:{weekDays.complete}</li>
-                                </ul>
-                                
-                            </div>
-                        })}
+                                    </ul>
+                                </div>
+                            })}
                         </div>
                     })}
                 
-                </div>
+            </div>
         )
     }
 }

@@ -64,6 +64,22 @@ class App extends React.Component {
     })
   }
 
+  toggleCompleted = (beginner) => {
+    fetch(baseURL + '/training/' + beginner, {
+      method: 'PUT',
+      body: JSON.stringify({completed: !beginner}),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    }).then(res => res.json())
+    .then(resJson => {
+        const copybeginner = [...this.state.beginner]
+        const findIndex = this.state.beginner.findIndex(beginner => beginner === resJson)
+        copybeginner[findIndex].completed = resJson.completed
+        this.setState({beginner: copybeginner})
+    })
+  }
+
 
 
   addUser = (newUser) => {
@@ -88,7 +104,6 @@ class App extends React.Component {
       <div>
         <NavBar />
         <Switch>
-
           {/* HOME PAGE */}
           <Route exact path='/' component={Home}/>
           {/* TRAINING CALENDAR */}
@@ -102,15 +117,13 @@ class App extends React.Component {
           {/* LOGIN PAGE */}
           <Route exact path='/login' render={() => <LogInForm baseURL={baseURL} handleChange={this.handleChange} users={this.state.users}
           currentUser={this.state.currentUser} /> } />
-
           {/* ERROR PAGE */}
           <Route component={Error}/>
         </Switch>
         <h1>Welcome to the long distance project.</h1>
 
         <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay }/>
-        <History deleteTrainingDay={ this.deleteTrainingDay } trainingDay={ this.state.trainingDay } />
-
+        <History deleteTrainingDay={this.deleteTrainingDay} trainingDay={ this.state.trainingDay } />
       </div>
     );
   }

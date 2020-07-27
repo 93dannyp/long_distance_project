@@ -17,8 +17,11 @@ export default class History extends Component {
                                 <td>Time:  { trainingDay.time }</td>
                                 <td>Week: { trainingDay.week }</td>
                                 <td>Week: { trainingDay.day }</td>
+                                <td>
                                 <button onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>Delete</button>
+                                </td>
                                 </tr>
+                                
                                 )
                             })
                         }
