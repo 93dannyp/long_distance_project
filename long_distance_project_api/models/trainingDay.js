@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const trainingDaySchema = mongoose.Schema({
     title: {type: String, required: true},
@@ -9,5 +9,5 @@ const trainingDaySchema = mongoose.Schema({
     goalWasMet: {type: Boolean, default: false},
 })
 
-module.exports = mongoose.model('TrainingDay', trainingDaySchema)
-
+const Training = mongoose.model("TrainingDay", trainingDaySchema);
+module.exports = Training;

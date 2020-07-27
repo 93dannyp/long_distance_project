@@ -15,14 +15,13 @@ class TodaysWorkout extends Component {
         });
     }
 
-
-
-
     handleSubmit = (event) => {
         event.preventDefault();
+        // console.log(this.props.currentUser);
         fetch(this.props.baseURL + '/training', {
             method: 'POST',
             body: JSON.stringify({
+                currentUserId: this.props.currentUser._id,
                 title: this.state.title,
                 distance: this.state.distance,
                 time: this.state.time,
