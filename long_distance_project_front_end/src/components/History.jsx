@@ -3,7 +3,20 @@ import { Link } from 'react-router-dom'
 import EdipataForm from './EditDataForm.jsx'
 
 export default class History extends Component {
+    state = {
+        trainingHistory: this.props.currentUser.trainingHistory,
+    }
+    
 
+returnCurrentUser = () => {
+
+    this.props.currentUser.trainingHistory.map(trainingDay => {
+        console.log(trainingDay.title)
+    }) 
+    
+    // return Object.entries(this.props.currentUser);
+
+}
 
     render() {
         return (

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import beginner from '../data/beginner.js'
 
 
 class WeekCalendarBeginner extends Component {
@@ -27,7 +26,7 @@ class WeekCalendarBeginner extends Component {
                 
                 {this.props.beginner.map((beginner, index) => {
                     return <div key={index}>
-                        <p>{beginner.weekNumber}</p>
+                        <p>WEEK: {beginner.weekNumber}</p>
                         {beginner.weekDays.map((weekDays, subindex) => {
                             return <div key={subindex}>
                                 <ul onClick={ () => {this.toggleComplete()}}>
