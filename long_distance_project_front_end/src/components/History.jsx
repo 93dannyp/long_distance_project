@@ -25,7 +25,13 @@ returnCurrentUser = () => {
             <div className='album py-5 bg-light'>
                 <div className='container'>
                     <div className='row'>
+
+                        
+                            
+
+
                         {this.props.trainingDay.map(trainingDay => {
+
                             return (
                                 <div key={ trainingDay._id } className='col-md-4' >
                                     <div className='card mb-4 shadow-sm' >
@@ -51,6 +57,7 @@ returnCurrentUser = () => {
                                 )
                             })
                         }
+
                         </div>
                     </div>
                 </div>

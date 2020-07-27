@@ -82,6 +82,24 @@ class App extends React.Component {
 
  
 
+  toggleCompleted = (beginner) => {
+    fetch(baseURL + '/training/' + beginner, {
+      method: 'PUT',
+      body: JSON.stringify({completed: !beginner}),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    }).then(res => res.json())
+    .then(resJson => {
+        const copybeginner = [...this.state.beginner]
+        const findIndex = this.state.beginner.findIndex(beginner => beginner === resJson)
+        copybeginner[findIndex].completed = resJson.completed
+        this.setState({beginner: copybeginner})
+    })
+  }
+
+
+
   addUser = (newUser) => {
     const copyUser = [...this.state.users];
     copyUser.push(newUser);
@@ -100,7 +118,7 @@ class App extends React.Component {
       }
     }).then(res => res.json())
     .then(resJson => {
-         const copyTrainingDays = [...this.state.trainingDay]
+          const copyTrainingDays = [...this.state.trainingDay]
           const findIndex = this.state.trainingDay.findIndex(data => data._id === resJson._id)
           copyTrainingDays[findIndex].goalWasMet = resJson.goalWasMet
           this.setState({trainingDay: copyTrainingDays})
