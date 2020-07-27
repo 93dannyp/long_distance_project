@@ -4,8 +4,12 @@ import React from 'react'
 export default function Home() { 
         return (
             <div>
-
-                <h1>Home Page</h1>
+                <section className='jumbotron text-center'>
+                    <div className='container'>
+                    <h3>Welcome to the Long Distance Project.</h3>
+                        <p></p>
+                    </div>
+                </section>
 
             </div>
         )
