@@ -45,9 +45,6 @@ class TodaysWorkout extends Component {
         });
     }
 
-
-
-
     render () {
         return (
                 <form onSubmit={ (event) => this.handleSubmit(event) }>

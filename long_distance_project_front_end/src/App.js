@@ -10,6 +10,7 @@ import TodaysWorkout from "./components/TodaysWorkout.jsx";
 import RunnerInfo from "./components/RunnerInfo.jsx";
 import NewUserForm from "./components/NewUserForm.jsx";
 import LogInForm from "./components/LogInForm.jsx";
+import EditDataForm from './components/EditDataForm'
 
 let baseURL = "http://localhost:3003";
 
@@ -51,16 +52,18 @@ class App extends React.Component {
   };
 
   deleteTrainingDay = (id) => {
-    console.log(id)
-    fetch(baseURL + '/training/' + id, {
-      method: 'DELETE'
-    }).then( response => {
-      const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === id)
-      const copyTrainingDay = [...this.state.trainingDay]
-      copyTrainingDay.splice(findIndex, 1)
-      this.setState({trainingDay: copyTrainingDay})
-    })
-  }
+    console.log(id);
+    fetch(baseURL + "/training/" + id, {
+      method: "DELETE",
+    }).then((response) => {
+      const findIndex = this.state.trainingDay.findIndex(
+        (trainingDay) => trainingDay._id === id
+      );
+      const copyTrainingDay = [...this.state.trainingDay];
+      copyTrainingDay.splice(findIndex, 1);
+      this.setState({ trainingDay: copyTrainingDay });
+    });
+  };
 
   toggleCompleted = (beginner) => {
     fetch(baseURL + '/training/' + beginner, {
@@ -88,6 +91,45 @@ class App extends React.Component {
     });
   };
 
+  toggleGoalWasMet = (data) => {
+    console.log(data)
+    fetch(baseURL + '/training/' + data._id, {
+      method: 'PUT',
+      body: JSON.stringify({goalWasMet: !data.goalWasMet}),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    }).then(res => res.json())
+    .then(resJson => {
+          const copyTrainingDays = [...this.state.trainingDay]
+          const findIndex = this.state.trainingDay.findIndex(data => data._id === resJson._id)
+          copyTrainingDays[findIndex].goalWasMet = resJson.goalWasMet
+          this.setState({trainingDay: copyTrainingDays})
+    })
+  }
+  
+   //////////////////////////////////////////////////////////////////////////////////
+
+  // editTrainingDay = (data) => {
+  //   console.log(data)
+  //   console.log(data._id)
+  //   fetch(baseURL + '/training/' + data._id, {
+  //     method: 'PUT',
+  //     body: JSON.stringify(data
+  //     ),
+  //     headers: {
+  //       'Content-Type' : 'application/json'
+  //     }
+  //   }).then(res => res.json())
+    // .then(resJson => {
+    //      const copyTrainingDay = [...this.state.trainingDay]
+    //      console.log(this.state.trainingDay)
+    //       const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === resJson._id)
+    //       console.log(findIndex)
+    //       copyTrainingDay[findIndex].title = resJson.title
+    //       this.setState({trainingDay: copyTrainingDay})
+    // })
+  // }
   handleLogin = (event, username) => {
     event.preventDefault();
     fetch(baseURL + "/sessions/", {
@@ -183,8 +225,16 @@ class App extends React.Component {
               />
             )}
           />
+          
+          
+          
+          {/* INPUT WORKOUT PAGE */}
+          <Route exact path='/recordworkout' render={() => <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay} editTrainingDay={this.editTrainingDay} /> } />
+        
+          {/* EDIT WORKOUT PAGE */}
+          <Route exact path='/edit' baseURL={ baseURL } component={ EditDataForm } render={() => <EditDataForm editTrainingDay={this.editTrainingDay} users={this.state.users} currentUser={this.state.currentUser} handleChange={this.handleChange} /> } />
+                                  
           {/* LOGIN PAGE */}
-
           <Route
             exact
             path="/login"
@@ -200,26 +250,24 @@ class App extends React.Component {
             )}
           />
 
-
           {/* ERROR PAGE */}
           <Route component={Error} />
         </Switch>
-        <h1>Welcome to the long distance project.</h1>
-
         <TodaysWorkout
           baseURL={baseURL}
           addTrainingDay={this.addTrainingDay}
           currentUser={this.state.currentUser}
         />
         <History
+          toggleGoalWasMet={this.toggleGoalWasMet}
+          editTrainingDay={this.editTrainingDay}
           users={this.state.users}
           trainingDay={this.state.trainingDay}
           currentUser={this.state.currentUser}
           deleteTrainingDay={this.deleteTrainingDay}
         />
-
       </div>
-    );
+    )
   }
 }
 
