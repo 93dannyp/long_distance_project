@@ -51,16 +51,18 @@ class App extends React.Component {
   };
 
   deleteTrainingDay = (id) => {
-    console.log(id)
-    fetch(baseURL + '/training/' + id, {
-      method: 'DELETE'
-    }).then( response => {
-      const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === id)
-      const copyTrainingDay = [...this.state.trainingDay]
-      copyTrainingDay.splice(findIndex, 1)
-      this.setState({trainingDay: copyTrainingDay})
-    })
-  }
+    console.log(id);
+    fetch(baseURL + "/training/" + id, {
+      method: "DELETE",
+    }).then((response) => {
+      const findIndex = this.state.trainingDay.findIndex(
+        (trainingDay) => trainingDay._id === id
+      );
+      const copyTrainingDay = [...this.state.trainingDay];
+      copyTrainingDay.splice(findIndex, 1);
+      this.setState({ trainingDay: copyTrainingDay });
+    });
+  };
 
   addUser = (newUser) => {
     const copyUser = [...this.state.users];
@@ -182,7 +184,6 @@ class App extends React.Component {
             )}
           />
 
-
           {/* ERROR PAGE */}
           <Route component={Error} />
         </Switch>
@@ -199,7 +200,6 @@ class App extends React.Component {
           currentUser={this.state.currentUser}
           deleteTrainingDay={this.deleteTrainingDay}
         />
-
       </div>
     );
   }
