@@ -15,3 +15,7 @@ code {
 .goalWasMet {
   text-decoration: line-through;
 }
+
+.abtn {
+  color: white,
+}

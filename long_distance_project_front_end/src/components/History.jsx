@@ -38,10 +38,10 @@ returnCurrentUser = () => {
                                                 <p className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Week: { trainingDay.day }</p>
                                                 <div className='d-flex justify-content-between align-items-center'>
                                                     <p>
-                                                        <a key={trainingDay._id} onClick={() => this.props.toggleGoalWasMet(trainingDay)} className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Goal Met?</a>
+                                                        <a key={trainingDay._id} onClick={() => this.props.toggleGoalWasMet(trainingDay)} className='abtn btn btn-lg btn-primary btn-block' >Goal Met?</a>
                                                     </p>
                                                     <p>
-                                                        <button onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>DELETE</button>
+                                                        <button className='btn btn-lg btn-primary btn-block' onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>DELETE</button>
                                                     </p>
                                                 </div>
                                             </div>
