@@ -32,3 +32,5 @@ The front end uses React to implement the Views portion of the project. It uses 
 
 ## Styling 
 Bootstrap was used as the CSS framework.
+
+Jacob Cox, Yad Najmaldin, and Daniel Perkins
