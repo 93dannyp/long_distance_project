@@ -17,6 +17,7 @@ class WeekCalendarBeginner extends Component {
     render () {
         return (
             <div>
+            <div>
                 <section className='jumbotron text-center'>
                     <div className='container'>
                     <h3>The Road Ahead</h3>
@@ -31,17 +32,15 @@ class WeekCalendarBeginner extends Component {
                             return <div key={subindex}>
                                 <ul onClick={ () => {this.toggleComplete()}}>
                                     <li>Day: {weekDays.day}</li>
-                                    
                                     <li>Workout: {weekDays.run}</li>
                                     <li>Complete:{weekDays.complete}</li>
-                                </ul>
-                                
-                            </div>
-                        })}
+                                    </ul>
+                                </div>
+                            })}
                         </div>
                     })}
                 
-                </div>
+            </div>
         )
     }
 }

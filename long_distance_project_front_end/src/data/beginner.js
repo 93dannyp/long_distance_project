@@ -1,7 +1,6 @@
 //example referencing the run for week 9 would look like this:
 // beginner[8].weekDays[2].run returns '3'
 
-
 const beginner = [
     {weekNumber: '1', 
     weekDays: [

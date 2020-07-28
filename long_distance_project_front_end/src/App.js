@@ -50,18 +50,35 @@ class App extends React.Component {
   };
 
   deleteTrainingDay = (id) => {
-    console.log(id);
-    fetch(baseURL + "/training/" + id, {
-      method: "DELETE",
-    }).then((response) => {
-      const findIndex = this.state.trainingDay.findIndex(
-        (trainingDay) => trainingDay._id === id
-      );
-      const copyTrainingDay = [...this.state.trainingDay];
-      copyTrainingDay.splice(findIndex, 1);
-      this.setState({ trainingDay: copyTrainingDay });
-    });
-  };
+    console.log(id)
+    fetch(baseURL + '/training/' + id, {
+      method: 'DELETE'
+    }).then( response => {
+      const findIndex = this.state.trainingDay.findIndex(trainingDay => trainingDay._id === id)
+      const copyTrainingDay = [...this.state.trainingDay]
+      copyTrainingDay.splice(findIndex, 1)
+      this.setState({trainingDay: copyTrainingDay})
+    })
+  }
+
+  
+  toggleCompleted = (beginner) => {
+    fetch(baseURL + '/training/' + beginner, {
+      method: 'PUT',
+      body: JSON.stringify({completed: !beginner}),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    }).then(res => res.json())
+    .then(resJson => {
+        const copybeginner = [...this.state.beginner]
+        const findIndex = this.state.beginner.findIndex(beginner => beginner === resJson)
+        copybeginner[findIndex].completed = resJson.completed
+        this.setState({beginner: copybeginner})
+    })
+  }
+
+ 
 
   addUser = (newUser) => {
     const copyUser = [...this.state.users];
