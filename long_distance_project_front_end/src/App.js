@@ -3,7 +3,6 @@ import beginner from "./data/beginner.js";
 import WeekCalendarBeginner from "./components/WeekCalendarBeginner.jsx";
 import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
-import About from "./components/About";
 import NavBar from "./components/NavBar";
 import History from "./components/History";
 import TodaysWorkout from "./components/TodaysWorkout.jsx";
@@ -18,7 +17,6 @@ class App extends React.Component {
   state = {
     beginner: beginner,
     completedDays: [],
-    message: "Hello",
     trainingDay: [],
     users: [],
     currentUser: [],
@@ -234,12 +232,7 @@ class App extends React.Component {
               <WeekCalendarBeginner beginner={this.state.beginner} />
             )}
           />
-          {/* ABOUT PAGE */}
-          <Route
-            exact
-            path="/about"
-            render={() => <About message={this.state.message} />}
-          />
+         
           {/* SIGN UP PAGE */}
           <Route
             exact
@@ -254,8 +247,6 @@ class App extends React.Component {
               />
             )}
           />
-          
-          
           
           {/* INPUT WORKOUT PAGE */}
           <Route exact path='/recordworkout' render={() => <TodaysWorkout baseURL={ baseURL } addTrainingDay={ this.addTrainingDay} editTrainingDay={this.editTrainingDay} currentUser={this.state.currentUser} /> } />

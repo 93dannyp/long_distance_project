@@ -16,7 +16,7 @@ code {
     monospace;
 }
 
-background: url(https://images.unsplash.com/photo-1485388276992-0ce5ce2d6981?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1999&q=80);
+
 
 
 .goalWasMet {
@@ -25,4 +25,8 @@ background: url(https://images.unsplash.com/photo-1485388276992-0ce5ce2d6981?ixl
 
 .card-body {
   background: rgba(178, 221, 235, 0.685);
+
+}
+.abtn {
+  color: white;
 }
