@@ -13,7 +13,8 @@ const userController = require("./controllers/users_controller.js");
 const PORT = process.env.PORT;
 
 //Database
-const mogodbURI = process.env.MONGODB_URI;
+const mongodbURI = process.env.MONGODB_URI;
+
 
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>
@@ -21,7 +22,7 @@ mongoose.connection.on("error", (err) =>
 );
 mongoose.connection.on("disconnected", () => console.log("mongo disconnected"));
 
-mongoose.connect("mongodb://localhost:27017/training", {
+mongoose.connect(mongodbURI, {
   useNewUrlParser: true,
 });
 mongoose.connection.once("open", () => {

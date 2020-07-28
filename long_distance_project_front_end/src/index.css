@@ -6,6 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h3 {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -14,10 +18,15 @@ code {
 
 
 
+
 .goalWasMet {
   text-decoration: line-through;
 }
 
+.card-body {
+  background: rgba(178, 221, 235, 0.685);
+
+}
 .abtn {
-  color: white,
+  color: white;
 }

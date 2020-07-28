@@ -23,9 +23,20 @@ returnCurrentUser = () => {
         return (
             <div>
             <div className='album py-5 bg-light'>
+                <section>
+                    <div className='jumbotron text-center'>
+                    <div className='container'>
+                        <h3>Welcome to the Long Distance Project</h3>
+                            </div>
+                        <img src="https://images.unsplash.com/photo-1485388276992-0ce5ce2d6981?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1999&q=80" width="800" height="400"></img>
+                        
+                    </div><br/>
+                </section>
                 <div className='container'>
                     <div className='row'>
+
                         {this.props.trainingDay.map(trainingDay => {
+
                             return (
                                 <div key={ trainingDay._id } className='col-md-4' >
                                     <div className='card mb-4 shadow-sm' >
@@ -38,10 +49,10 @@ returnCurrentUser = () => {
                                                 <p className={trainingDay.goalWasMet ? 'goalWasMet' : null}>Week: { trainingDay.day }</p>
                                                 <div className='d-flex justify-content-between align-items-center'>
                                                     <p>
-                                                        <a key={trainingDay._id} onClick={() => this.props.toggleGoalWasMet(trainingDay)} className='abtn btn btn-lg btn-primary btn-block' >Goal Met?</a>
+                                                        <a key={trainingDay._id} onClick={() => this.props.toggleGoalWasMet(trainingDay)} className="btn btn-info my-4 btn-block" >Goal Met?</a>
                                                     </p>
                                                     <p>
-                                                        <button className='btn btn-lg btn-primary btn-block' onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>DELETE</button>
+                                                        <button className="btn btn-info my-4 btn-block" onClick={()=>this.props.deleteTrainingDay(trainingDay._id)}>DELETE</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -51,6 +62,7 @@ returnCurrentUser = () => {
                                 )
                             })
                         }
+
                         </div>
                     </div>
                 </div>
