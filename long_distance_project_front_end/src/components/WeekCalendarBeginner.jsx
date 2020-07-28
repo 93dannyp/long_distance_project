@@ -19,6 +19,8 @@ class WeekCalendarBeginner extends Component {
                 <div data-gr-c-s-loaded="true">
                     <main role="main">
                         <section className='jumbotron text-center'>
+                            <img src="https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80"  alt width="800" height="300" ></img>
+                            
                             <div className='container'>
                             <h3>The Road Ahead</h3>
                                 <p></p>

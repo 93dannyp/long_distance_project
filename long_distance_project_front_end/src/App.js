@@ -211,6 +211,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
+        
         <Switch>
           {/* HOME PAGE */}
           <Route exact path="/"

@@ -49,35 +49,44 @@ class TodaysWorkout extends Component {
 
     render () {
         return (
-                <form onSubmit={ (event) => this.handleSubmit(event) }>
+            <div data-gr-c-s-loaded="true">
+                <section className='jumbotron text-center'>
+                    <div class="view view-cascade overlay">
+                        <img src="https://images.unsplash.com/photo-1435527173128-983b87201f4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1347&q=80"   width="1000" height="300"></img>
+                    </div><br/>
+                </section>
+                <div className="text-center container">
+                <form className="form-signin container" onSubmit={ (event) => this.handleSubmit(event) }>
 
                 <label htmlFor="title">Title: </label>
-                <input type="text" id="title"
+                <input type="text" id="title" className="form-control" required autoFocus
                     onChange={ (event) => this.handleChange(event) }
                     value={ this.state.title }/><br />
 
                 <label htmlFor="distance">Distance: </label>
-                <input type="number" id="distance"
+                <input type="number" id="distance" className="form-control" required autoFocus
                     onChange={ (event) => this.handleChange(event) }
                     value={ this.state.distance }/><br />
                 
                 <label htmlFor="time">Time: </label>
-                <input type="number" id="time"
+                <input type="number" id="time" className="form-control" required autoFocus
                     onChange={ (event) => this.handleChange(event) }
                     value={ this.state.time }/><br />
 
                 <label htmlFor="week">Week: </label>
-                <input type="number" id="week"
+                <input type="number" id="week" className="form-control" required autoFocus
                     onChange={ (event) => this.handleChange(event) }
                     value={ this.state.week }/><br />
                 
                 <label htmlFor="day">Day: </label>
-                <input type="number" id="day"
+                <input type="number" id="day" className="form-control" required autoFocus
                     onChange={ (event) => this.handleChange(event) }
                     value={ this.state.day }/><br />
 
-                <input type="submit" value="Submit your day!"/>
+                <input type="submit" value="Submit your day!" class="btn btn-info my-4 btn-block"/>
             </form>
+            </div>
+            </div>
         )
     }
 }

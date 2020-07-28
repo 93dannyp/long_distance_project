@@ -44,14 +44,14 @@ export default class NewUserForm extends Component {
     
     render() {
         return (
-            <div>
-                <h1>Create Your User Profile</h1>
-                <form onSubmit={(evt) => this.handleSubmit(evt)}>
-                    <label htmlFor="username">Username: </label>
-                    <input type="text" id="username" onChange={(evt) => this.handleChange(evt)} value={ this.props.username} /><br/>
-                    <label htmlFor="level">Skill Level: </label>
-                    <input type="text" id="level" onChange={(evt) => this.handleChange(evt)} value={ this.props.level}/><br/>
-                    <input type="submit" value="Create-User"/>
+            <div className="text-center container" data-gr-c-s-loaded="true">
+                <h1 className="h3 mb-3 font-weight-normal">Create Your User Profile</h1>
+                <form lassName="form-signin container" onSubmit={(evt) => this.handleSubmit(evt)}>
+                    <label htmlFor="username"  className="sr-only">Username: </label>
+                    <input type="text" id="username" className="form-control" placeholder="Username" required autoFocus onChange={(evt) => this.handleChange(evt)} value={ this.props.username} />
+                    <label htmlFor="level" className="sr-only">Skill Level: </label>
+                    <input type="text" id="level" className="form-control" placeholder="Level" required autoFocus onChange={(evt) => this.handleChange(evt)} value={ this.props.level}/><br/>
+                    <input type="submit" value="Create-User" class="btn btn-info my-4 btn-block"/>
                 </form>
                 
                 
