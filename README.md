@@ -2,6 +2,8 @@
 
 The Long Distance Project is an app designed for runners dipping their toe into long distances. Our goal is to provide the tools necesary for proper marathon training.
 
+
+
 ## Features
 
 ### 1. Sign Up
@@ -20,6 +22,8 @@ The user can also delete a day if they would like to clear space in their log or
 ### 4. Record
 The user can record their workouts on the Record page then they will appear on the Home page. The user inputs the distance ran (in miles), elapsed time (in minutes), number week of training, and number day of the training week.
 
+
+
 ## The Back End
 The server side uses Mongoose, Node.js, and Express for its database and server functionality.The back end contains the Models and Controllers.
 
@@ -27,10 +31,9 @@ The two models are related in a one to many relationship because the User model 
 
 The controllers include a users controller for user sign up, a sessions controller for user login, and a training controller for training sessions. The training sessions controller includes the necessary route's for full CRUD functionality.
 
-## The Front End
-The front end uses React to implement the Views portion of the project. It uses Switch Routes for different pages. The website contains a navigation bar where it hosts links to the various pages (described in the Features section).
 
-## Styling 
-Bootstrap was used as the CSS framework.
+
+## The Front End
+The front end uses React to implement the Views portion of the project. It uses Switch Routes for different pages. The website contains a navigation bar where it hosts links to the various pages (described in the Features section). Bootstrap was used as the CSS framework.
 
 Jacob Cox, Yad Najmaldin, and Daniel Perkins
